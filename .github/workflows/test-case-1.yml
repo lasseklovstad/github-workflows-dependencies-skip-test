@@ -13,7 +13,7 @@ jobs:
   changes:
     uses: ./.github/workflows/check-changes.yml
     with:
-      infra_has_changes: true
+      infra_has_changes: false
 
   trigger-deploy-infra-test:
     needs: changes
@@ -23,7 +23,7 @@ jobs:
   trigger-deploy-test:
     needs: trigger-deploy-infra-test
     if: ${{ !cancelled() && !failure() }}
-    uses: ./.github/workflows/success.yml
+    uses: ./.github/workflows/fail.yml
 
   trigger-smoke-test-test:
     needs: trigger-deploy-test
