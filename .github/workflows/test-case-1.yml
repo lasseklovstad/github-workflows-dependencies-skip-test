@@ -13,7 +13,7 @@ jobs:
   changes:
     uses: ./.github/workflows/check-changes.yml
     with:
-      infra_has_changes: false
+      infra_has_changes: true
 
   trigger-deploy-infra-test:
     needs: changes
