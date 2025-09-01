@@ -1,0 +1,13 @@
+name: Always Fail Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  always-fail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail step
+        run: |
+          echo "This workflow always fails."
+          exit 1

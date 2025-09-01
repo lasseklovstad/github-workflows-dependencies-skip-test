@@ -1,0 +1,20 @@
+name: Check for changes
+
+on:
+  workflow_call:
+    inputs:
+      infra_has_changes:
+        required: true
+        type: boolean
+    outputs:
+      infra:
+        description: "Returns the test_value input."
+        value: ${{ jobs.filter.outputs.infra }}
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      infra: ${{ inputs.infra_has_changes }}
+    steps:
+      - run: echo "Test value is ${{ inputs.infra_has_changes }}"

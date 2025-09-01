@@ -1,0 +1,12 @@
+name: Always Success Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  always-succeed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail step
+        run: |
+          echo "This workflow always succeeds."
