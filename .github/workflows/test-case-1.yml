@@ -28,12 +28,12 @@ jobs:
   trigger-smoke-test-test:
     needs: trigger-deploy-test
     if: ${{ !cancelled() && !failure() }}
-    uses: ./.github/workflows/fail.yml
+    uses: ./.github/workflows/success.yml
 
   trigger-deploy-infra-prod:
     needs: [changes, trigger-smoke-test-test]
     if: ${{ !cancelled() && !failure() && needs.changes.outputs.infra == 'true' }}
-    uses: ./.github/workflows/success.yml
+    uses: ./.github/workflows/fail.yml
 
   trigger-deploy-prod:
     needs: [trigger-deploy-infra-prod]
