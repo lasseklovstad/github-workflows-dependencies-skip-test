@@ -18,7 +18,7 @@ jobs:
   trigger-deploy-infra-test:
     needs: changes
     if: ${{ !cancelled() && needs.changes.outputs.infra == 'true' }}
-    uses: ./.github/workflows/success.yml
+    uses: ./.github/workflows/fail.yml
 
   trigger-deploy-test:
     needs: trigger-deploy-infra-test
