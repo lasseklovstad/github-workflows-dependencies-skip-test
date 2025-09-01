@@ -17,13 +17,14 @@ jobs:
 
   trigger-deploy-infra-test:
     needs: changes
-    if: needs.changes.outputs.infra == 'true'
+    if: ${{ !cancelled() && needs.changes.outputs.infra == 'true' }}
     uses: ./.github/workflows/success.yml
 
   trigger-deploy-test:
     needs: trigger-deploy-infra-test
     if: ${{ !cancelled() && !failure() }}
     uses: ./.github/workflows/success.yml
+
   trigger-smoke-test-test:
     needs: trigger-deploy-test
     if: ${{ !cancelled() && needs.trigger-deploy-test.result == 'success' }}
@@ -35,8 +36,8 @@ jobs:
     uses: ./.github/workflows/success.yml
 
   trigger-deploy-prod:
-    needs: [trigger-deploy-infra-prod, trigger-smoke-test-test]
-    if: ${{ !cancelled() && needs.trigger-deploy-infra-prod.result != 'failed' && needs.trigger-smoke-test-test.result == 'success' }}
+    needs: [trigger-deploy-infra-prod]
+    if: ${{ !cancelled() && !failure() }}
     uses: ./.github/workflows/success.yml
 
   trigger-smoke-test-prod:
