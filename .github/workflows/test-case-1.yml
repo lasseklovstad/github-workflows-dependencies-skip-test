@@ -22,7 +22,7 @@ jobs:
 
   trigger-deploy-test:
     needs: trigger-deploy-infra-test
-    if: ${{ !cancelled() && !failure() }}
+    if: ${{ always() && needs.trigger-deploy-infra-test.result != 'failed' }}
     uses: ./.github/workflows/success.yml
 
   trigger-smoke-test-test:
